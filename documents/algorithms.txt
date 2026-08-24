@@ -1,0 +1,3 @@
+Algorithms are step by step procedures for solving problems.
+Searching and sorting are important algorithmic techniques.
+Data structures help algorithms organize information.
