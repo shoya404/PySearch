@@ -1,3 +1,5 @@
 Python is a popular programming language.
-Python is easy to learn and useful for automation.
-Python is also widely used in data science.
+Python is easy to learn.
+Python is useful for automation.
+Python is widely used in data science.
+I enjoy programming in Python.

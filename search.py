@@ -1,30 +1,37 @@
+import heapq
+
 from tokenizer import tokenize
 
 
-def search_index(index, query):
+def search_index(index, query, top_k=10):
     words = tokenize(query)
 
     if not words:
-        return set()
+        return []
 
-    results = index.get(words[0], set()).copy()
+    matching_files = None
 
-    for word in words[1:]:
-        results &= index.get(word, set())
+    for word in words:
+        word_files = set(index.get(word, {}).keys())
 
-    return results
-if __name__ == "__main__":
-    from pysearch import find_text_files
-    from index import build_index
+        if matching_files is None:
+            matching_files = word_files
+        else:
+            matching_files &= word_files
 
-    files = find_text_files("documents")
-    index = build_index(files)
+    if not matching_files:
+        return []
 
-    query = input("Search: ")
+    heap = []
 
-    results = search_index(index, query)
+    for file in matching_files:
+        score = sum(index[word][file] for word in words)
 
-    print(f'\nResults for "{query}":')
+        item = (score, str(file))
 
-    for file in results:
-        print(file)
+        if len(heap) < top_k:
+            heapq.heappush(heap, item)
+        elif score > heap[0][0]:
+            heapq.heapreplace(heap, item)
+
+    return sorted(heap, reverse=True)

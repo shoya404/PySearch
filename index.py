@@ -1,21 +1,23 @@
-from collections import defaultdict
+from collections import defaultdict, Counter
 
 from tokenizer import tokenize
 
 
 def build_index(files):
-    index = defaultdict(set)
+    index = defaultdict(Counter)
 
     for file in files:
         with open(file, "r", encoding="utf-8") as f:
             text = f.read()
 
         words = tokenize(text)
+        word_counts = Counter(words)
 
-        for word in words:
-            index[word].add(file)
+        for word, count in word_counts.items():
+            index[word][file] = count
 
     return index
+
 
 if __name__ == "__main__":
     from pysearch import find_text_files

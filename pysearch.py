@@ -18,16 +18,19 @@ def main():
 
     query = input("\nSearch: ")
 
-    results = search_index(index, query)
+    results = search_index(index, query, top_k=5)
 
     print(f'\nResults for "{query}":')
     print("-" * 40)
 
     if not results:
         print("No results found.")
-    else:
-        for file in results:
-            print(file)
+        return
+
+    for position, (score, file) in enumerate(results, start=1):
+        print(f"{position}. {file}")
+        print(f"   Score: {score}")
+        print()
 
 
 if __name__ == "__main__":
