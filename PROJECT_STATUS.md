@@ -1,7 +1,7 @@
 # PySearch Project Status
 
 ## Current Day
-Day 1
+Day 4
 
 ## Goal
 Build a terminal-based search engine using Python and DSA.
@@ -14,6 +14,12 @@ Build a terminal-based search engine using Python and DSA.
 - Implemented text file reading
 - Implemented basic keyword search
 - Added initial README
+- Added argparse-based CLI
+- Added --top option
+- Added input validation and error handling
+- Added pytest test suite
+- Added tests for tokenizer, index, and search
+- Added pytest configuration via conftest.py
 
 ## Current Architecture
 
